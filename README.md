@@ -165,14 +165,5 @@ python app.py  # Para recriar as tabelas automaticamente
 
 ---
 
-## 📌 Observações
-✅ Código modularizado com **Blueprints** para melhor organização.  
-✅ Utiliza **Flask-SQLAlchemy** para gerenciar o banco de dados.  
-✅ Testado com **Postman** e **Insomnia** para validar os endpoints.  
 
-Se tiver alguma dúvida, entre em contato! 🚀
-
-
-## Autor
-Criado por [Cleilson Brito]
 
