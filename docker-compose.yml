@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: minhaapi-flask
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - minhaapi-net
+
+  nginx:
+    image: nginx:latest
+    container_name: minhaapi-nginx
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - minhaapi-net
+
+networks:
+  minhaapi-net:
+    driver: bridge

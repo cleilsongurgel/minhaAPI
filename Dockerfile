@@ -1,17 +1,17 @@
-# Usar uma imagem oficial do Python como base
+# Usar imagem do Python como base
 FROM python:3.9
 
-# Definir diretório de trabalho dentro do container
+# Definir diretório de trabalho no container
 WORKDIR /app
 
-# Copiar os arquivos do projeto para o container
+# Copiar arquivos para dentro do container
 COPY . .
 
-# Instalar as dependências
+# Instalar dependências
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Expor a porta usada pelo Flask
-EXPOSE 5000
+# Expor a porta 8000 usada pelo Uvicorn
+EXPOSE 8000
 
-# Comando para rodar a aplicação
-CMD ["python", "app.py"]
+# Comando para iniciar o servidor com Uvicorn e Gunicorn
+CMD ["gunicorn", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "app:app"]

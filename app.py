@@ -20,4 +20,5 @@ def home():
     return "API está rodando!"
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    from uvicorn import run
+    run(app, host="0.0.0.0", port=8000)
