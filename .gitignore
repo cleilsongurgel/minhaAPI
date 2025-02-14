@@ -70,3 +70,6 @@ ipython_config.py
 
 # pyenv
 .python-ver
+
+# Testes
+#testes/
