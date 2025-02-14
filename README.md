@@ -1,88 +1,177 @@
-# Flask API de Usuários
+# API de Contas Bancárias
 
-Esta é uma API simples criada com Flask para fornecer informações sobre usuários armazenados em um banco de dados SQLite. Os dados são gerados aleatoriamente utilizando a biblioteca Faker.
+Esta é uma API RESTful desenvolvida em Flask para gerenciar contas bancárias. Ela permite criar, listar, atualizar e excluir contas de usuários.
 
-## Criação do Projeto
+## 🚀 Tecnologias Utilizadas
+- Python 3
+- Flask
+- Flask-SQLAlchemy
+- SQLite (banco de dados leve para testes)
 
-1. Crie um diretório para o projeto e acesse-o:
-   ```sh
-   mkdir flask_api_users
-   cd flask_api_users
-   ```
+---
 
-2. Inicialize um repositório Git (opcional):
-   ```sh
-   git init
-   ```
-
-3. Crie um ambiente virtual e ative-o:
-   ```sh
-   python -m venv venv
-   source venv/bin/activate  # Para Linux/Mac
-   venv\Scripts\activate  # Para Windows
-   ```
-
-4. Instale as dependências necessárias:
-   ```sh
-   pip install flask flask-sqlalchemy faker
-   ```
-
-5. Crie um arquivo `requirements.txt` para facilitar futuras instalações:
-   ```sh
-   pip freeze > requirements.txt
-   ```
-
-## Instalação e Configuração
-
-1. Clone o repositório:
-   ```sh
-   git clone <URL_DO_REPOSITORIO>
-   cd <NOME_DO_REPOSITORIO>
-   ```
-
-2. Ative o ambiente virtual:
-   ```sh
-   source venv/bin/activate  # Para Linux/Mac
-   venv\Scripts\activate  # Para Windows
-   ```
-
-3. Instale as dependências:
-   ```sh
-   pip install -r requirements.txt
-   ```
-
-4. Execute a API:
-   ```sh
-   python app.py
-   ```
-
-## Uso
-
-A API disponibiliza o seguinte endpoint:
-
-### Obter todos os usuários
+## 📁 Estrutura do Projeto
 ```
-GET /users
+MinhaApi/
+│── app.py               # Arquivo principal da API
+│── models.py            # Modelo do banco de dados
+│── routes/
+│   ├── __init__.py      # Inicialização do Blueprint
+│   ├── contas.py        # Rotas para CRUD de contas
+│── venv/                # Ambiente virtual (ignorar no Git)
+│── contas.db            # Banco de dados SQLite
+│── requirements.txt     # Dependências do projeto
+│── README.md            # Documentação da API
 ```
-- Retorna uma lista de usuários cadastrados no banco de dados.
 
-Exemplo de resposta:
+---
+
+## ⚙️ Configuração e Execução
+
+### 1️⃣ Criar o ambiente virtual
+```bash
+python -m venv venv
+```
+
+### 2️⃣ Ativar o ambiente virtual
+No Windows:
+```bash
+venv\Scripts\activate
+```
+No Linux/macOS:
+```bash
+source venv/bin/activate
+```
+
+### 3️⃣ Instalar dependências
+```bash
+pip install -r requirements.txt
+```
+
+### 4️⃣ Rodar a API
+```bash
+python app.py
+```
+Ou, se preferir usar o Flask CLI:
+```bash
+flask run
+```
+
+---
+
+## 🛠 Endpoints da API
+
+### 1️⃣ Criar uma Conta
+**POST /contas**
+```json
+{
+    "nome": "João Silva",
+    "conta_corrente": "123456",
+    "saldo": 1500.75,
+    "email": "joao@email.com",
+    "telefone": "11987654321"
+}
+```
+**Resposta (201 Created):**
+```json
+{
+    "message": "Conta criada com sucesso!",
+    "id": 1
+}
+```
+
+---
+
+### 2️⃣ Listar Todas as Contas
+**GET /contas**
+
+**Resposta:**
 ```json
 [
     {
         "id": 1,
-        "name": "John Doe",
-        "email": "johndoe@example.com",
-        "age": 30
-    },
-    {
-        "id": 2,
-        "name": "Jane Smith",
-        "email": "janesmith@example.com",
-        "age": 25
+        "nome": "João Silva",
+        "conta_corrente": "123456",
+        "saldo": 1500.75,
+        "email": "joao@email.com",
+        "telefone": "11987654321"
     }
 ]
 ```
+
+---
+
+### 3️⃣ Buscar Conta por ID
+**GET /contas/{id}**
+
+**Exemplo:**
+`GET /contas/1`
+
+**Resposta:**
+```json
+{
+    "id": 1,
+    "nome": "João Silva",
+    "conta_corrente": "123456",
+    "saldo": 1500.75,
+    "email": "joao@email.com",
+    "telefone": "11987654321"
+}
+```
+
+---
+
+### 4️⃣ Atualizar Conta
+**PUT /contas/{id}**
+
+**Exemplo:**
+`PUT /contas/1`
+```json
+{
+    "saldo": 2000.00
+}
+```
+**Resposta:**
+```json
+{
+    "message": "Conta atualizada com sucesso!"
+}
+```
+
+---
+
+### 5️⃣ Excluir Conta
+**DELETE /contas/{id}**
+
+**Exemplo:**
+`DELETE /contas/1`
+
+**Resposta:**
+```json
+{
+    "message": "Conta excluída com sucesso!"
+}
+```
+
+---
+
+## 🛠 Banco de Dados
+A API usa **SQLite** para armazenar os dados. Caso precise recriar o banco de dados:
+```bash
+rm contas.db  # No Linux/macOS
+DEL contas.db  # No Windows
+python app.py  # Para recriar as tabelas automaticamente
+```
+
+---
+
+## 📌 Observações
+✅ Código modularizado com **Blueprints** para melhor organização.  
+✅ Utiliza **Flask-SQLAlchemy** para gerenciar o banco de dados.  
+✅ Testado com **Postman** e **Insomnia** para validar os endpoints.  
+
+Se tiver alguma dúvida, entre em contato! 🚀
+
 
 ## Autor
 Criado por [Cleilson Brito]
