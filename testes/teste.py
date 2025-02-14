@@ -35,5 +35,5 @@ def inserir_registros_api(api_url, quantidade_registros=1):
 
 # Exemplo de uso
 if __name__ == "__main__":
-    API_URL = "http://localhost:5000/contas"  # Substituir pela URL real da API
-    inserir_registros_api(API_URL, 50)  # Insere 5 registros
+    API_URL = "http://172.26.45.223/contas"  # Substituir pela URL real da API
+    inserir_registros_api(API_URL, 1000)  # Insere 5 registros
