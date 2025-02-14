@@ -17,8 +17,14 @@ app.register_blueprint(contas_bp)
 
 @app.route('/')
 def home():
-    return "API está rodando!"
+    return "API está rodando!", 200
 
 if __name__ == '__main__':
-    from uvicorn import run
-    run(app, host="0.0.0.0", port=8000)
+    from hypercorn.asyncio import serve
+    from hypercorn.config import Config
+
+    config = Config()
+    config.bind = ["0.0.0.0:8000"]
+
+    import asyncio
+    asyncio.run(serve(app, config))
